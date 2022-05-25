@@ -6,44 +6,66 @@
             "id": "629231c6-cb6e-42ba-9422-88b8d38ecacb",
             "actions": [
                 {
-                    "name": "Pan",
-                    "type": "PassThrough",
-                    "id": "dc689473-07f7-4e05-aa60-ba73e4cef754",
+                    "name": "RotateCamera",
+                    "type": "Value",
+                    "id": "2d945a1f-c93c-46a4-b9ee-53a3369bd888",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "Zoom",
+                    "name": "ZoomCamera",
                     "type": "PassThrough",
-                    "id": "818d59a6-3052-48bf-8ad3-f9f8483bf24e",
+                    "id": "e11fda5d-a363-4a7c-9aaf-9ea6f968b101",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "8935a346-135c-4a1f-9959-32382d8dce6f",
-                    "path": "<Mouse>/position",
+                    "name": "One Modifier",
+                    "id": "b1c1af58-5e9f-4807-a5af-f291fa5e0d90",
+                    "path": "OneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pan",
-                    "isComposite": false,
+                    "action": "RotateCamera",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "modifier",
+                    "id": "4d9b9cf2-9909-42b8-8280-d0ff36c97853",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "49379971-86e7-4691-84c6-2cb1db1c060f",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "RotateCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "1c90e556-d665-497b-8a71-f5545b2d1e17",
+                    "id": "1bbe2828-8d31-4899-9c9d-e43ecc950ea3",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "Normalize(min=-1,max=1)",
                     "groups": "",
-                    "action": "Zoom",
+                    "action": "ZoomCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
