@@ -36,27 +36,27 @@ public class Tile : MonoBehaviour
 
 
 
-    private void OnMouseDown()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+    //private void OnMouseDown()
+    //{
+    //    if (EventSystem.current.IsPointerOverGameObject())
+    //        return;
 
-        tileClicked.Invoke();
-        rend.material.color = gameManager.tileClickedColor;
-    }
+    //    tileClicked.Invoke();
+    //    rend.material.color = gameManager.tileClickedColor;
+    //}
 
 
-    private void OnMouseEnter()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+    //private void OnMouseEnter()
+    //{
+    //    if (EventSystem.current.IsPointerOverGameObject())
+    //        return;
 
-        rend.material.color = gameManager.tileHoverColor;
+    //    rend.material.color = gameManager.tileHoverColor;
 
-    }
+    //}
 
-    private void OnMouseExit()
-    {
-        rend.material.color = startColor;
-    }
+    //private void OnMouseExit()
+    //{
+    //    rend.material.color = startColor;
+    //}
 }
