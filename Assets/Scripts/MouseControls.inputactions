@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PanCamera",
+                    "type": "PassThrough",
+                    "id": "0fcdffe9-6255-4b62-8c95-32659175e512",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EnablePanCamera",
+                    "type": "Button",
+                    "id": "44d49e05-9e70-420f-ae6f-8652f905a969",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -66,6 +84,28 @@
                     "processors": "Normalize(min=-1,max=1)",
                     "groups": "",
                     "action": "ZoomCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed09836d-108e-4add-bab2-0f3e62c02f45",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PanCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ddf9147-9329-4b6c-a9df-d24662d2eff9",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnablePanCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
