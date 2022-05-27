@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class Tile : MonoBehaviour
+public class MyTile : MonoBehaviour
 {
 
     public UnityEvent tileClicked;
@@ -24,6 +24,8 @@ public class Tile : MonoBehaviour
         startColor = rend.material.color;
 
         parentHex = transform.parent.gameObject;
+
+        Debug.Log(transform.GetComponent<MeshFilter>().sharedMesh.bounds.size);
         //tileClicked.AddListener(parentHex.GetComponent<Hex>().MyTileClicked);
         
 

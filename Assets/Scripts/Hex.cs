@@ -94,7 +94,7 @@ public class Hex : MonoBehaviour
     {
         tileType = tileTypeToAdd;
         tile = (GameObject)Instantiate(tileType.prefab, transform, false);
-        tile.GetComponent<Tile>().tileClicked.AddListener(MyTileClicked);
+        tile.GetComponent<MyTile>().tileClicked.AddListener(MyTileClicked);
         tile.GetComponent<MeshRenderer>().material = tileType.material;
         UpdateHeight();
     }
