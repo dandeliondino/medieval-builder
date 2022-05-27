@@ -793,7 +793,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6054852, y: 1}
+    m_SensorSize: {x: 1.3248945, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3703,19 +3703,7 @@ MonoBehaviour:
     m_ActionId: 0fcdffe9-6255-4b62-8c95-32659175e512
     m_ActionName: Mouse/PanCamera[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1626374741}
-        m_TargetAssemblyTypeName: PanCameraRig, Assembly-CSharp
-        m_MethodName: Pan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 44d49e05-9e70-420f-ae6f-8652f905a969
     m_ActionName: Mouse/EnablePanCamera[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
@@ -4768,6 +4756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90d1a87db124e841838a9cf2e848e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &1637651039
 GameObject:
   m_ObjectHideFlags: 0

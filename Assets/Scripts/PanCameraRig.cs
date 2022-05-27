@@ -26,17 +26,14 @@ public class PanCameraRig : MonoBehaviour
 
     private void Start()
     {
-        mouseInput.Mouse.EnablePanCamera.performed += ctx => PanPressed(ctx);
-        //mouseInput.Mouse.EnablePanCamera.canceled += _ => DisablePan();
-        mouseInput.Mouse.PanCamera.performed += ctx => Pan(ctx);
+        mouseInput.Mouse.EnablePanCamera.performed += context => PanPressed(context);
+        mouseInput.Mouse.PanCamera.performed += context => Pan(context);
     }
-
-    public void PanPressed(InputAction.CallbackContext input)
+    
+    public void PanPressed(InputAction.CallbackContext context)
     {
-        //panEnabled = input.ReadValue<bool>().isPressed;
-        //Debug.Log(input);
-        float value = input.ReadValue<float>();
-        Debug.Log("Pan pressed: " + value);
+        float value = context.ReadValue<float>();
+        //Debug.Log("Pan pressed: " + value);
 
         if (value <= 0)
         {
@@ -48,19 +45,31 @@ public class PanCameraRig : MonoBehaviour
         
     }
 
-    public void Pan(InputAction.CallbackContext input)
+    public void Pan(InputAction.CallbackContext context)
     {
-        if (panEnabled)
+        if (!panEnabled)
         {
-            Debug.Log("Panning: " + input.ReadValue<Vector2>());
-            Vector2 panValue = input.ReadValue<Vector2>();
-            transform.Translate(new Vector3(panValue.x * Time.deltaTime * speed, 0, panValue.y * Time.deltaTime * speed));
+            return;
         }
-            //Debug.Log("Panning: " + input);
-            
+
+        Vector2 mouseDelta = context.ReadValue<Vector2>();
+        Debug.Log("mouseDelta: " + mouseDelta);
+        Vector3 panVector = new Vector3(-mouseDelta.x * Time.deltaTime * speed, 0, -mouseDelta.y * Time.deltaTime * speed);
+        Debug.Log("panVector: " + panVector);
+
+        //transform.Translate(panVector);
+
+        float facing = Camera.main.transform.eulerAngles.y;
+        Debug.Log("Facing: " + facing);
+
+        Vector3 adjustedPanVector = Quaternion.Euler(0, facing, 0) * panVector;
+        Debug.Log("adjustedPanVector: " + adjustedPanVector);
+
+        transform.Translate(adjustedPanVector);
 
 
-        //PlayerInput input = GameManager.instance.GetComponent<PlayerInput>();
-        //input.GetComponent<>
+
+        //transform.Translate(new Vector3(panValue.x * Time.deltaTime * speed, 0, panValue.y * Time.deltaTime * speed));
+
     }
 }
