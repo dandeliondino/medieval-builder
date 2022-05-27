@@ -66,10 +66,5 @@ public class PanCameraRig : MonoBehaviour
         Debug.Log("adjustedPanVector: " + adjustedPanVector);
 
         transform.Translate(adjustedPanVector);
-
-
-
-        //transform.Translate(new Vector3(panValue.x * Time.deltaTime * speed, 0, panValue.y * Time.deltaTime * speed));
-
     }
 }
