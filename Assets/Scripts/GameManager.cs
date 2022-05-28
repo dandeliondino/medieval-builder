@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject newMapUI;
     public GameObject editMapUI;
 
-    public TileType tileTypeToPlace;
+    public TerrainDef tileTypeToPlace;
 
     public GameObject tileTypeToggle;
     public GameObject tileTypeButtonPrefab;
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public Color tileHoverColor;
     public Color tileClickedColor;
 
-    public Dictionary<string, TileType> tileTypeDict;
+    public Dictionary<string, TerrainDef> tileTypeDict;
 
     public static GameManager instance;
 
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         SetTileTypeToPlace(selectedTileTypeToggle.GetComponent<TileTypeToggle>().tileType);
     }
 
-    public void SetTileTypeToPlace(TileType newTileTypeToPlace)
+    public void SetTileTypeToPlace(TerrainDef newTileTypeToPlace)
     {
         tileTypeToPlace = newTileTypeToPlace;
         UpdateHoverColors();
@@ -152,9 +152,9 @@ public class GameManager : MonoBehaviour
 
     private void SetUpTileTypeButtons()
     {
-        foreach (KeyValuePair<string, TileType> elem in tileTypeDict)
+        foreach (KeyValuePair<string, TerrainDef> elem in tileTypeDict)
         {
-            TileType tileType = elem.Value;
+            TerrainDef tileType = elem.Value;
 
             GameObject tileTypeButton = (GameObject)Instantiate(tileTypeToggle, tileTypeButtonContainer.transform, false);
             tileTypeButton.GetComponent<Toggle>().group = tileTypeButtonContainer.GetComponent<ToggleGroup>();
@@ -169,10 +169,10 @@ public class GameManager : MonoBehaviour
 
     private void CreateTileTypeDict()
     {
-        TileType[] tileTypes = Resources.LoadAll<TileType>("Tile Types");
+        TerrainDef[] tileTypes = Resources.LoadAll<TerrainDef>("Tile Types");
 
         Debug.Log("TileTypes Loaded: " + tileTypes.Length);
-        tileTypeDict = new Dictionary<string, TileType>();
+        tileTypeDict = new Dictionary<string, TerrainDef>();
         foreach (var tileType in tileTypes)
         {
             tileTypeDict.Add(tileType.name, tileType);

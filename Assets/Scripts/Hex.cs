@@ -15,7 +15,7 @@ public class Hex : MonoBehaviour
     public int zcoord;
     public int height = 0;
 
-    private TileType tileType;
+    private TerrainDef tileType;
     private GameObject tile;
     private GameObject baseTile;
 
@@ -90,7 +90,7 @@ public class Hex : MonoBehaviour
         }
     }
 
-    public void AddTile(TileType tileTypeToAdd)
+    public void AddTile(TerrainDef tileTypeToAdd)
     {
         tileType = tileTypeToAdd;
         tile = (GameObject)Instantiate(tileType.prefab, transform, false);

@@ -8,9 +8,4 @@ public class HexTile : Tile
 {
 
 
-    private void Awake()
-    {
-        //Debug.Log("I have awakened!");
-    }
-
 }

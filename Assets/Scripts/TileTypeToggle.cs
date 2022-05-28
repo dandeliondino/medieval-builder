@@ -5,5 +5,5 @@ using UnityEngine;
 public class TileTypeToggle : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TileType tileType;
+    public TerrainDef tileType;
 }

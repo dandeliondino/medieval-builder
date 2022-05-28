@@ -92,7 +92,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7021732196842737084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd02b3290cc20fd4abd69c67e511234b, type: 3}
   m_Name: 
@@ -100,8 +100,6 @@ MonoBehaviour:
   tileClicked:
     m_PersistentCalls:
       m_Calls: []
-  hoverColor: {r: 0.8962264, g: 0.9843137, b: 0.063412234, a: 0.80784315}
-  clickedColor: {r: 0.990566, g: 0.07008721, b: 0.07008721, a: 0.56078434}
 --- !u!65 &5329202774198665055
 BoxCollider:
   m_ObjectHideFlags: 0

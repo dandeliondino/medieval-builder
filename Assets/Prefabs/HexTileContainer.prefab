@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4473740232879909411}
+  - component: {fileID: 2448415005931840552}
   m_Layer: 0
   m_Name: HexTileContainer
   m_TagString: Untagged
@@ -31,3 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2448415005931840552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7044719810608787827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e68849885fb4c45a4635cea131f5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTilePrefab: {fileID: 2318016442847964563, guid: 5509ccd59a2c2cc4c9488a5e5e163ce6, type: 3}
+  terrainTilePrefab: {fileID: 1116251073080772604, guid: fc4303fdfb56a6341997bf7a3441b813, type: 3}
+  baseTile: {fileID: 0}
+  terrainTile: {fileID: 0}
+  building: {fileID: 0}

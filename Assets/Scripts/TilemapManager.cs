@@ -6,28 +6,25 @@ using UnityEngine.Tilemaps;
 public class TilemapManager : MonoBehaviour
 {
     public BoundsInt area;
-    public GameObject tilePrefab;
     public Sprite sprite;
+    public TerrainDef oldTileTerrain;
+    public TerrainDef newTileTerrain;
+    public GameObject hexTileContainer;
 
+    private HexTile originalTile;
+    private HexTile newTile;
     private Tilemap tilemap;
 
-    public Color tileColor;
-
-    public HexTile placeholderTile;
-    public HexTile dirtTile;
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
+        newTile = HexTile.CreateInstance<HexTile>();
+        originalTile = HexTile.CreateInstance<HexTile>();
 
-        //HexTile newTile = HexTile.CreateInstance<HexTile>();
-        //newTile.sprite = sprite;
-        //newTile.gameObject = tilePrefab;
+        newTile.gameObject = hexTileContainer;
+        originalTile.gameObject = hexTileContainer;
 
-        
-
-        //Vector3Int pos = new Vector3Int(0, 0, 0);
-        //tilemap.SetTile(pos, newTile);
 
         tilemap.origin = area.position;
         tilemap.size = area.size;
@@ -37,7 +34,7 @@ public class TilemapManager : MonoBehaviour
 
         for (int i = 0; i < tileArray.Length; i++)
         {
-            tileArray[i] = dirtTile;
+            tileArray[i] = newTile;
         }
 
         tilemap.SetTilesBlock(area, tileArray);
@@ -65,12 +62,6 @@ public class TilemapManager : MonoBehaviour
 
     public void FillEmptyTiles()
     {
-        //HexTile secondTile = HexTile.CreateInstance<HexTile>();
-        //secondTile.sprite = sprite;
-        //secondTile.color = tileColor;
-
-        //secondTile.color = tileColor;
-
         for (int x = 0; x < tilemap.size.x; x++)
         {
             for (int y = 0; y < tilemap.size.y; y++)
@@ -78,7 +69,17 @@ public class TilemapManager : MonoBehaviour
                 Vector3Int pos = new Vector3Int(x, y, 0);
                 if (!tilemap.HasTile(pos))
                 {
-                    tilemap.SetTile(pos, placeholderTile);
+                    tilemap.SetTile(pos, newTile);
+                    //HexTile t = (HexTile)tilemap.GetTile(pos);
+                    GameObject obj = tilemap.GetInstantiatedObject(pos);
+                    obj.GetComponent<HexTileContainer>().terrainDef = newTileTerrain;
+                    obj.GetComponent<HexTileContainer>().Setup();
+                } else
+                {
+                    GameObject obj = tilemap.GetInstantiatedObject(pos);
+                    obj.GetComponent<HexTileContainer>().terrainDef = oldTileTerrain;
+                    obj.GetComponent<HexTileContainer>().height = 3;
+                    obj.GetComponent<HexTileContainer>().Setup();
                 }
             }
         }

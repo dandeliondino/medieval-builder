@@ -11,7 +11,7 @@ public class TileManager : MonoBehaviour
 
     public GameObject hexPrefab;
 
-    public TileType emptyTile;
+    public TerrainDef emptyTile;
 
     private GameObject hexContainer;
     
@@ -77,7 +77,7 @@ public class TileManager : MonoBehaviour
             GameObject hexObj = hexes[hexData.z][hexData.x];
             Hex hex = hexObj.GetComponent<Hex>();
             hex.height = hexData.height;
-            TileType tileType = gameManager.tileTypeDict[hexData.tileType];
+            TerrainDef tileType = gameManager.tileTypeDict[hexData.tileType];
             hex.AddTile(tileType);
 
             Debug.Log("Generating hex: " + hexObj.name + " - " + tileType.name);
