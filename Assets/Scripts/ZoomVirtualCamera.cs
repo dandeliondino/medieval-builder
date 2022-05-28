@@ -36,7 +36,7 @@ public class ZoomVirtualCamera : MonoBehaviour
         float zoomDirection = inputProvider.GetAxisValue(2);
         Vector3 currentOffset = transposer.m_FollowOffset;
 
-        Debug.Log("Current offset: " + currentOffset);
+        //Debug.Log("Current offset: " + currentOffset);
 
         float yNew;
         float zNew;

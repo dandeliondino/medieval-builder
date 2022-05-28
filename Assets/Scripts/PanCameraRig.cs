@@ -53,17 +53,17 @@ public class PanCameraRig : MonoBehaviour
         }
 
         Vector2 mouseDelta = context.ReadValue<Vector2>();
-        Debug.Log("mouseDelta: " + mouseDelta);
+        //Debug.Log("mouseDelta: " + mouseDelta);
         Vector3 panVector = new Vector3(-mouseDelta.x * Time.deltaTime * speed, 0, -mouseDelta.y * Time.deltaTime * speed);
-        Debug.Log("panVector: " + panVector);
+        //Debug.Log("panVector: " + panVector);
 
         //transform.Translate(panVector);
 
         float facing = Camera.main.transform.eulerAngles.y;
-        Debug.Log("Facing: " + facing);
+        //Debug.Log("Facing: " + facing);
 
         Vector3 adjustedPanVector = Quaternion.Euler(0, facing, 0) * panVector;
-        Debug.Log("adjustedPanVector: " + adjustedPanVector);
+        //Debug.Log("adjustedPanVector: " + adjustedPanVector);
 
         transform.Translate(adjustedPanVector);
     }

@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     public void CreateBlankMap()
     {
         GotoEditMap();
-        tileManager.GenerateBlankMap((int)xSlider.value, (int)zSlider.value);
+        //tileManager.GenerateBlankMap((int)xSlider.value, (int)zSlider.value);
     }
 
     public void ChangeState(string newState)

@@ -25,7 +25,7 @@ public class MyTile : MonoBehaviour
 
         parentHex = transform.parent.gameObject;
 
-        Debug.Log(transform.GetComponent<MeshFilter>().sharedMesh.bounds.size);
+        //Debug.Log(transform.GetComponent<MeshFilter>().sharedMesh.bounds.size);
         //tileClicked.AddListener(parentHex.GetComponent<Hex>().MyTileClicked);
         
 

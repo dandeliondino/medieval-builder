@@ -8,8 +8,8 @@ public class GridScript : MonoBehaviour
     void Start()
     {
         Grid grid = GetComponent<Grid>();
-        Debug.Log("Cell size: " + grid.cellSize);
-        Debug.Log("World to cell: " + grid.WorldToCell(new Vector3(3, 0, 1.75f)));
+        //Debug.Log("Cell size: " + grid.cellSize);
+        //Debug.Log("World to cell: " + grid.WorldToCell(new Vector3(3, 0, 1.75f)));
     }
 
     // Update is called once per frame
