@@ -6,11 +6,16 @@ using UnityEngine.EventSystems;
 
 public class MouseInteractions : MonoBehaviour
 {
+    public GameObject terrainClickUI;
+
     MouseInput mouseInput;
     private Camera mainCamera;
     private Collider lastCollider;
 
     PointerEventData pointerData;
+
+    private bool mouseOverUI;
+    private bool mouseOverTerrain;
 
     public void Awake()
     {
@@ -61,9 +66,9 @@ public class MouseInteractions : MonoBehaviour
         //    }
         //}
 
-        
+        mouseOverUI = IsMouseOverUI(mousePosition);
 
-        if (IsMouseOverUI(mousePosition))
+        if (mouseOverUI)
         {
             //Debug.Log("Over UI element");
             return;
@@ -72,11 +77,19 @@ public class MouseInteractions : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            mouseOverTerrain = false;
+
             if (hit.collider != null)
             {
+                
+                if (hit.collider.CompareTag("TerrainTile"))
+                {
+                    mouseOverTerrain = true;
+                }
+
                 if (hit.collider != lastCollider)
                 {
-                    if (hit.collider.CompareTag("TerrainTile"))
+                    if (mouseOverTerrain)
                     {
                         MouseEnterTerrainTile(hit.collider);
                     }
