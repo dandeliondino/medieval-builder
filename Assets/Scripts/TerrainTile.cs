@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class MyTile : MonoBehaviour
+public class TerrainTile : MonoBehaviour
 {
 
     public UnityEvent tileClicked;
@@ -25,6 +25,8 @@ public class MyTile : MonoBehaviour
 
         parentHex = transform.parent.gameObject;
 
+        Debug.Log("My tile started");
+
         //Debug.Log(transform.GetComponent<MeshFilter>().sharedMesh.bounds.size);
         //tileClicked.AddListener(parentHex.GetComponent<Hex>().MyTileClicked);
         
@@ -38,27 +40,31 @@ public class MyTile : MonoBehaviour
 
 
 
-    private void OnMouseDown()
+    public void MouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //    return;
 
         tileClicked.Invoke();
         rend.material.color = gameManager.tileClickedColor;
     }
 
 
-    private void OnMouseEnter()
+    public void MouseHover()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+
+        //Debug.Log("Mouse entered tile");
+
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //    return;
 
         rend.material.color = gameManager.tileHoverColor;
 
     }
 
-    private void OnMouseExit()
+    public void MouseExit()
     {
+        //Debug.Log("Mouse exited tile");
         rend.material.color = startColor;
     }
 }

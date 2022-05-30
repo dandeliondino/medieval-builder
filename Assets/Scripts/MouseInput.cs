@@ -62,6 +62,15 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""92c1e02f-db08-4e14-b7f0-41eeb24feb01"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                     ""action"": ""EnablePanCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87e60fab-6522-42ce-855e-1d54add8d27e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,6 +162,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         m_Mouse_ZoomCamera = m_Mouse.FindAction("ZoomCamera", throwIfNotFound: true);
         m_Mouse_PanCamera = m_Mouse.FindAction("PanCamera", throwIfNotFound: true);
         m_Mouse_EnablePanCamera = m_Mouse.FindAction("EnablePanCamera", throwIfNotFound: true);
+        m_Mouse_MousePosition = m_Mouse.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +226,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Mouse_ZoomCamera;
     private readonly InputAction m_Mouse_PanCamera;
     private readonly InputAction m_Mouse_EnablePanCamera;
+    private readonly InputAction m_Mouse_MousePosition;
     public struct MouseActions
     {
         private @MouseInput m_Wrapper;
@@ -213,6 +235,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         public InputAction @ZoomCamera => m_Wrapper.m_Mouse_ZoomCamera;
         public InputAction @PanCamera => m_Wrapper.m_Mouse_PanCamera;
         public InputAction @EnablePanCamera => m_Wrapper.m_Mouse_EnablePanCamera;
+        public InputAction @MousePosition => m_Wrapper.m_Mouse_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -234,6 +257,9 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                 @EnablePanCamera.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnEnablePanCamera;
                 @EnablePanCamera.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnEnablePanCamera;
                 @EnablePanCamera.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnEnablePanCamera;
+                @MousePosition.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_MouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -250,6 +276,9 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                 @EnablePanCamera.started += instance.OnEnablePanCamera;
                 @EnablePanCamera.performed += instance.OnEnablePanCamera;
                 @EnablePanCamera.canceled += instance.OnEnablePanCamera;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -260,5 +289,6 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         void OnZoomCamera(InputAction.CallbackContext context);
         void OnPanCamera(InputAction.CallbackContext context);
         void OnEnablePanCamera(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

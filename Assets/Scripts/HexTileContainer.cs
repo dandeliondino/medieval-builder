@@ -29,7 +29,7 @@ public class HexTileContainer : MonoBehaviour
         for (int i = 0; i < height; i++)
         {
             GameObject baseObject = (GameObject)Instantiate(baseTilePrefab, transform, false);
-            Debug.Log("baseObjects=" + baseObjects);
+            //Debug.Log("baseObjects=" + baseObjects);
             baseObject.transform.Translate(new Vector3(0, i, 0));
             baseObjects.Add(baseObject);
         }
