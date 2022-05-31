@@ -46,6 +46,11 @@ public class MouseInteractions : MonoBehaviour
 
     public void MouseClicked(InputAction.CallbackContext context)
     {
+        if (!mouseOverUI)
+        {
+            terrainClickUI.Hide();
+        }
+
         if (mouseOverTerrain)
         {
             lastCollider.GetComponent<TerrainTile>().MouseDown();

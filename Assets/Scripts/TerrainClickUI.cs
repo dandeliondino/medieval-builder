@@ -7,6 +7,8 @@ public class TerrainClickUI : MonoBehaviour
     public GameObject canvas;
     public GameObject panel;
 
+    public HexTileContainer hexTileContainer;
+
     private void Start()
     {
         Hide();
@@ -19,19 +21,19 @@ public class TerrainClickUI : MonoBehaviour
 
     public void ShowAtTile(GameObject tile)
     {
-        //Vector3 cameraPosition = Camera.main.WorldToScreenPoint(tile.transform.position);
-        //transform.position = tile.transform.position;
         panel.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, tile.transform.position);
         canvas.SetActive(true);
-        //RotateToCamera(Camera.main);
+        hexTileContainer = tile.GetComponent<TerrainTile>().hexTileContainer;
     }
 
-    public void RotateToCamera(Camera camera)
+    public void RaiseTerrain()
     {
-        //transform.rotation = Quaternion.LookRotation(transform.position - camera.transform.position);
-        //transform.LookAt(camera.transform);
-        transform.LookAt(transform.position + camera.transform.rotation * Vector3.forward, Vector3.up);
-        
+        hexTileContainer.RaiseTerrain();
+    }
+
+    public void LowerTerrain()
+    {
+        hexTileContainer.LowerTerrain();
     }
 
 }

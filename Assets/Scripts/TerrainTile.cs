@@ -10,6 +10,7 @@ public class TerrainTile : MonoBehaviour
     //private TerrainClickUI terrainClickUI;
 
     public UnityEvent tileClicked;
+    public HexTileContainer hexTileContainer;
 
     private Renderer rend;
     private Color startColor;

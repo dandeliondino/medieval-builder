@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTilePrefab: {fileID: 2318016442847964563, guid: 5509ccd59a2c2cc4c9488a5e5e163ce6, type: 3}
-  terrainTilePrefab: {fileID: 1116251073080772604, guid: fc4303fdfb56a6341997bf7a3441b813, type: 3}
-  baseTile: {fileID: 0}
-  terrainTile: {fileID: 0}
-  building: {fileID: 0}
+  terrainDef: {fileID: 0}
+  height: 0
+  heightUnit: 0.5
+  baseHeight: 0.5
+  maxHeight: 6
+  minHeight: 0

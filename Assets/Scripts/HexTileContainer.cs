@@ -7,30 +7,41 @@ public class HexTileContainer : MonoBehaviour
     public GameObject baseTilePrefab;
     public TerrainDef terrainDef;
     public int height = 0;
+    public float heightUnit = 0.5f;
+    public float baseHeight = 0.5f;
+
+    public int maxHeight = 6;
+    public int minHeight = 0;
 
     private GameObject terrainObject;
     private List<GameObject> baseObjects;
 
-    private void Start()
+    private void Awake()
     {
-        //baseObjects = new List<GameObject>();
+        baseObjects = new List<GameObject>();
     }
 
     public void Setup()
     {
-        GenerateBase();
         GenerateTerrain();
+        GenerateElevation();
     }
 
     private void GenerateBase()
     {
-        baseObjects = new List<GameObject>();
+        foreach (var obj in baseObjects)
+        {
+            Destroy(obj);
+        }
 
-        for (int i = 0; i < height; i++)
+        baseObjects.Clear();
+
+        int baseObjectsNeeded = Mathf.RoundToInt((height * heightUnit) / baseHeight);
+        
+        for (int i = 0; i < baseObjectsNeeded; i++)
         {
             GameObject baseObject = (GameObject)Instantiate(baseTilePrefab, transform, false);
-            //Debug.Log("baseObjects=" + baseObjects);
-            baseObject.transform.Translate(new Vector3(0, i, 0));
+            baseObject.transform.Translate(new Vector3(0, i * baseHeight, 0));
             baseObjects.Add(baseObject);
         }
     }
@@ -39,6 +50,37 @@ public class HexTileContainer : MonoBehaviour
     {
         terrainObject = (GameObject)Instantiate(terrainDef.prefab, transform, false);
         terrainObject.GetComponent<MeshRenderer>().material = terrainDef.material;
-        terrainObject.transform.Translate(new Vector3(0, height, 0));
+        terrainObject.GetComponent<TerrainTile>().hexTileContainer = this;
     }
+
+    private void GenerateElevation()
+    {
+        GenerateBase();
+        float heightY = height * heightUnit;
+
+        terrainObject.transform.Translate(new Vector3(0, heightY - terrainObject.transform.position.y, 0));
+    }
+
+    public void RaiseTerrain()
+    {
+        SetTerrainHeight(height + 1);
+    }
+
+    public void LowerTerrain()
+    {
+        SetTerrainHeight(height - 1);
+    }
+
+    public void SetTerrainHeight(int newHeight)
+    {
+        int clampedHeight = Mathf.Clamp(newHeight, minHeight, maxHeight);
+        if (height == clampedHeight)
+        {
+            return;
+        }
+
+        height = clampedHeight;
+        GenerateElevation();
+    }
+
 }
