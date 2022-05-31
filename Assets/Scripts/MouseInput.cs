@@ -71,6 +71,15 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""245ed145-d470-490c-8f35-9b3354da29b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,17 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0af2f3bf-ab75-4678-a6ea-b4117950b0ec"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,6 +183,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         m_Mouse_PanCamera = m_Mouse.FindAction("PanCamera", throwIfNotFound: true);
         m_Mouse_EnablePanCamera = m_Mouse.FindAction("EnablePanCamera", throwIfNotFound: true);
         m_Mouse_MousePosition = m_Mouse.FindAction("MousePosition", throwIfNotFound: true);
+        m_Mouse_LeftClick = m_Mouse.FindAction("LeftClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Mouse_PanCamera;
     private readonly InputAction m_Mouse_EnablePanCamera;
     private readonly InputAction m_Mouse_MousePosition;
+    private readonly InputAction m_Mouse_LeftClick;
     public struct MouseActions
     {
         private @MouseInput m_Wrapper;
@@ -236,6 +258,7 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         public InputAction @PanCamera => m_Wrapper.m_Mouse_PanCamera;
         public InputAction @EnablePanCamera => m_Wrapper.m_Mouse_EnablePanCamera;
         public InputAction @MousePosition => m_Wrapper.m_Mouse_MousePosition;
+        public InputAction @LeftClick => m_Wrapper.m_Mouse_LeftClick;
         public InputActionMap Get() { return m_Wrapper.m_Mouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,6 +283,9 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                 @MousePosition.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnMousePosition;
+                @LeftClick.started -= m_Wrapper.m_MouseActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_MouseActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_MouseActionsCallbackInterface.OnLeftClick;
             }
             m_Wrapper.m_MouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -279,6 +305,9 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
             }
         }
     }
@@ -290,5 +319,6 @@ public partial class @MouseInput : IInputActionCollection2, IDisposable
         void OnPanCamera(InputAction.CallbackContext context);
         void OnEnablePanCamera(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class TerrainTile : MonoBehaviour
 {
+    //public GameObject terrainClickUIObject;
+    //private TerrainClickUI terrainClickUI;
 
     public UnityEvent tileClicked;
 
@@ -25,46 +27,29 @@ public class TerrainTile : MonoBehaviour
 
         parentHex = transform.parent.gameObject;
 
-        Debug.Log("My tile started");
+        //terrainClickUI = terrainClickUIObject.GetComponent<TerrainClickUI>();
 
-        //Debug.Log(transform.GetComponent<MeshFilter>().sharedMesh.bounds.size);
         //tileClicked.AddListener(parentHex.GetComponent<Hex>().MyTileClicked);
         
 
     }
 
-    void Update()
-    {
-        
-    }
-
-
-
     public void MouseDown()
     {
-        //if (EventSystem.current.IsPointerOverGameObject())
-        //    return;
-
-        tileClicked.Invoke();
+        //tileClicked.Invoke();
         rend.material.color = gameManager.tileClickedColor;
+        //terrainClickUI.ShowAtTile(this.gameObject);
     }
 
 
     public void MouseHover()
     {
-
-        //Debug.Log("Mouse entered tile");
-
-        //if (EventSystem.current.IsPointerOverGameObject())
-        //    return;
-
         rend.material.color = gameManager.tileHoverColor;
 
     }
 
     public void MouseExit()
     {
-        //Debug.Log("Mouse exited tile");
         rend.material.color = startColor;
     }
 }

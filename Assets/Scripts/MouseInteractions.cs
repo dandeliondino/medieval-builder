@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MouseInteractions : MonoBehaviour
 {
-    public GameObject terrainClickUI;
+    public TerrainClickUI terrainClickUI;
 
     MouseInput mouseInput;
     private Camera mainCamera;
@@ -36,48 +36,43 @@ public class MouseInteractions : MonoBehaviour
     private void Start()
     {
         mouseInput.Mouse.PanCamera.performed += context => MouseMoved(context);
+        mouseInput.Mouse.LeftClick.performed += context => MouseClicked(context);
+
         pointerData = new PointerEventData(EventSystem.current)
         {
             pointerId = -1,
         };
     }
 
+    public void MouseClicked(InputAction.CallbackContext context)
+    {
+        if (mouseOverTerrain)
+        {
+            lastCollider.GetComponent<TerrainTile>().MouseDown();
+            terrainClickUI.ShowAtTile(lastCollider.gameObject);
+        }
+    }
+
     public void MouseMoved(InputAction.CallbackContext context)
     {
-        //if (EventSystem.current.IsPointerOverGameObject())
-        //{
-        //    Debug.Log("IsPointerOverGameObject() = True");
-        //    return;
-        //}
+        mouseOverTerrain = false;
 
         Vector2 mousePosition = mouseInput.Mouse.MousePosition.ReadValue<Vector2>();
-        //Debug.Log("Mouse moved: " + mousePosition);
+
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
         RaycastHit hit;
-
-        //RaycastHit[] hits = Physics.RaycastAll(ray, 2000);
-        //Debug.Log("3d hits: " + hits.Length);
-        //for (int i = 0; i < hits.Length; i++)
-        //{
-        //    Debug.Log("#" + i + ": " + hits[i].collider.tag);
-        //    if (hits[i].collider.CompareTag("UI")) {
-        //        Debug.Log("Ignore");
-        //        return;
-        //    }
-        //}
 
         mouseOverUI = IsMouseOverUI(mousePosition);
 
         if (mouseOverUI)
         {
-            //Debug.Log("Over UI element");
             return;
         }
 
 
         if (Physics.Raycast(ray, out hit))
         {
-            mouseOverTerrain = false;
+            
 
             if (hit.collider != null)
             {
@@ -94,10 +89,8 @@ public class MouseInteractions : MonoBehaviour
                         MouseEnterTerrainTile(hit.collider);
                     }
 
-                    //Debug.Log("3D hit: " + hit.collider.tag);
                     if (lastCollider != null)
                     {
-                        //Debug.Log("No longer hitting: " + lastCollider);
                         if (lastCollider.CompareTag("TerrainTile"))
                         {
                             MouseExitTerrainTile(lastCollider);
@@ -107,7 +100,6 @@ public class MouseInteractions : MonoBehaviour
                 lastCollider = hit.collider;
             } else
             {
-                //Debug.Log("No longer hitting: " + lastCollider);
                 if (lastCollider.CompareTag("TerrainTile"))
                 {
                     MouseExitTerrainTile(lastCollider);
@@ -118,7 +110,6 @@ public class MouseInteractions : MonoBehaviour
         {
             if (lastCollider != null)
             {
-                //Debug.Log("No longer hitting: " + lastCollider);
                 if (lastCollider.CompareTag("TerrainTile"))
                 {
                     MouseExitTerrainTile(lastCollider);

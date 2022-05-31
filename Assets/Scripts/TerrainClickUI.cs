@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class TerrainClickUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject canvas;
+
+    private void Start()
     {
-        
+        Hide();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Hide()
     {
-        
+        canvas.SetActive(false);
     }
+
+    public void ShowAtTile(GameObject tile)
+    {
+        transform.position = tile.transform.position;
+        canvas.SetActive(true);
+    }
+
 }
