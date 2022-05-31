@@ -7,58 +7,27 @@ public class TilemapManager : MonoBehaviour
 {
     public BoundsInt area;
     public Sprite sprite;
-    public TerrainDef oldTileTerrain;
-    public TerrainDef newTileTerrain;
+    public TerrainDef emptyTerrainDef;
     public GameObject hexTileContainer;
 
     private HexTile originalTile;
-    private HexTile newTile;
+    private HexTile emptyTile;
     private Tilemap tilemap;
 
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        newTile = HexTile.CreateInstance<HexTile>();
-        originalTile = HexTile.CreateInstance<HexTile>();
-
-        newTile.gameObject = hexTileContainer;
-        originalTile.gameObject = hexTileContainer;
-
+        emptyTile = HexTile.CreateInstance<HexTile>();
+        emptyTile.gameObject = hexTileContainer;
 
         tilemap.origin = area.position;
         tilemap.size = area.size;
         tilemap.ResizeBounds();
 
-        TileBase[] tileArray = new TileBase[area.size.x * area.size.y * area.size.z];
-
-        for (int i = 0; i < tileArray.Length; i++)
-        {
-            tileArray[i] = newTile;
-        }
-
-        tilemap.SetTilesBlock(area, tileArray);
-
-        IncreaseSize();
-
-        Debug.Log("Tilemap size: " + tilemap.size);
-        Debug.Log("Tilemap origin: " + tilemap.origin);
-        //Debug.Log("Tilemap cell: " + tilemap.GetTile(new Vector3Int(0, 0, 0)));
-        //Debug.Log("Tilemap cell: " + tilemap.GetTile(new Vector3Int(1, 1, 1)));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void IncreaseSize()
-    {
-        tilemap.size = new Vector3Int(tilemap.size.x + 2, tilemap.size.y + 2, tilemap.size.z);
-        tilemap.ResizeBounds();
         FillEmptyTiles();
     }
+
 
     public void FillEmptyTiles()
     {
@@ -69,18 +38,44 @@ public class TilemapManager : MonoBehaviour
                 Vector3Int pos = new Vector3Int(x, y, 0);
                 if (!tilemap.HasTile(pos))
                 {
-                    tilemap.SetTile(pos, newTile);
-                    //HexTile t = (HexTile)tilemap.GetTile(pos);
+                    tilemap.SetTile(pos, emptyTile);
                     GameObject obj = tilemap.GetInstantiatedObject(pos);
-                    obj.GetComponent<HexTileContainer>().Setup(x, y, newTileTerrain, 0);
-                } else
-                {
-                    GameObject obj = tilemap.GetInstantiatedObject(pos);
-                    obj.GetComponent<HexTileContainer>().Setup(x, y, oldTileTerrain, 3);
+                    obj.GetComponent<HexTileContainer>().Setup(x, y, emptyTerrainDef, 0);
                 }
             }
         }
     }
+
+    public void RefreshHexCoordinates()
+    {
+        for (int x = 0; x < tilemap.size.x; x++)
+        {
+            for (int y = 0; y < tilemap.size.y; y++)
+            {
+                HexTileContainer hexTileContainer = getHexAtPosition(x, y);
+                if (hexTileContainer != null)
+                {
+                    hexTileContainer.xCoord = x;
+                    hexTileContainer.yCoord = y;
+                }
+            }
+        }
+    }
+
+    public HexTileContainer getHexAtPosition(int x, int y)
+    {
+        Vector3Int pos = new Vector3Int(x, y, 0);
+        GameObject obj = tilemap.GetInstantiatedObject(pos);
+        if (obj == null)
+        {
+            Debug.Log("No object at position: " + pos);
+            return null;
+        }
+
+        HexTileContainer hexTileContainer = obj.GetComponent<HexTileContainer>();
+        return hexTileContainer;
+    }
+
 
     // USE THIS WITH LOADING FROM SAVE
     //public void loadTiles()

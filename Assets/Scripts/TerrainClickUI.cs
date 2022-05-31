@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class TerrainClickUI : MonoBehaviour
 {
     public GameObject canvas;
     public GameObject panel;
+
+    public Tilemap tilemap;
 
     public Transform changeTerrainButtonContainer;
     public GameObject changeTerrainButtonPrefab;
@@ -16,6 +19,8 @@ public class TerrainClickUI : MonoBehaviour
     public TextMeshProUGUI heightLabel;
 
     public HexTileContainer hexTileContainer;
+
+    private Vector3Int hexPosition;
 
     private void Start()
     {
@@ -38,6 +43,8 @@ public class TerrainClickUI : MonoBehaviour
         panel.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, tile.transform.position);
         canvas.SetActive(true);
         hexTileContainer = tile.GetComponent<TerrainTile>().hexTileContainer;
+        hexPosition = new Vector3Int(hexTileContainer.xCoord, hexTileContainer.yCoord, 0);
+
         RefreshTileInfo();
     }
 
@@ -64,6 +71,20 @@ public class TerrainClickUI : MonoBehaviour
         coordinatesLabel.text = hexTileContainer.xCoord + ", " + hexTileContainer.yCoord;
         terrainLabel.text = hexTileContainer.terrainDef.displayName;
         heightLabel.text = hexTileContainer.height.ToString();
+    }
+
+    public void InsertColumn()
+    {
+        tilemap.InsertCells(hexPosition, new Vector3Int(1, 0, 0));
+        tilemap.ResizeBounds();
+        tilemap.GetComponent<TilemapManager>().FillEmptyTiles();
+    }
+
+    public void InsertRow()
+    {
+        tilemap.InsertCells(hexPosition, new Vector3Int(0, 1, 0));
+        tilemap.ResizeBounds();
+        tilemap.GetComponent<TilemapManager>().FillEmptyTiles();
     }
 
 }
