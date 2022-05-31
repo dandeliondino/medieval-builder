@@ -56,9 +56,21 @@ public class HexTileContainer : MonoBehaviour
     private void GenerateElevation()
     {
         GenerateBase();
-        float heightY = height * heightUnit;
+        SetTerrainObjectElevation();
+    }
 
+    private void SetTerrainObjectElevation()
+    {
+        float heightY = height * heightUnit;
         terrainObject.transform.Translate(new Vector3(0, heightY - terrainObject.transform.position.y, 0));
+    }
+
+    public void ChangeTerrain(TerrainDef newTerrainDef)
+    {
+        Destroy(terrainObject);
+        terrainDef = newTerrainDef;
+        GenerateTerrain();
+        SetTerrainObjectElevation();
     }
 
     public void RaiseTerrain()
@@ -82,5 +94,7 @@ public class HexTileContainer : MonoBehaviour
         height = clampedHeight;
         GenerateElevation();
     }
+
+
 
 }
