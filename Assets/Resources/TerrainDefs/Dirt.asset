@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7bee8d79066c194ab25ba6991652d99, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: 
-  displayName: Dirt (stacked)
+  displayName: Dirt
   prefab: {fileID: 1116251073080772604, guid: fc4303fdfb56a6341997bf7a3441b813, type: 3}
   material: {fileID: 2100000, guid: 5615453e211ac69438c86ce4e18cb977, type: 2}

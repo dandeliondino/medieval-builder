@@ -72,14 +72,11 @@ public class TilemapManager : MonoBehaviour
                     tilemap.SetTile(pos, newTile);
                     //HexTile t = (HexTile)tilemap.GetTile(pos);
                     GameObject obj = tilemap.GetInstantiatedObject(pos);
-                    obj.GetComponent<HexTileContainer>().terrainDef = newTileTerrain;
-                    obj.GetComponent<HexTileContainer>().Setup();
+                    obj.GetComponent<HexTileContainer>().Setup(x, y, newTileTerrain, 0);
                 } else
                 {
                     GameObject obj = tilemap.GetInstantiatedObject(pos);
-                    obj.GetComponent<HexTileContainer>().terrainDef = oldTileTerrain;
-                    obj.GetComponent<HexTileContainer>().height = 3;
-                    obj.GetComponent<HexTileContainer>().Setup();
+                    obj.GetComponent<HexTileContainer>().Setup(x, y, oldTileTerrain, 3);
                 }
             }
         }

@@ -13,6 +13,9 @@ public class HexTileContainer : MonoBehaviour
     public int maxHeight = 6;
     public int minHeight = 0;
 
+    public int xCoord;
+    public int yCoord;
+
     private GameObject terrainObject;
     private List<GameObject> baseObjects;
 
@@ -21,8 +24,13 @@ public class HexTileContainer : MonoBehaviour
         baseObjects = new List<GameObject>();
     }
 
-    public void Setup()
+    public void Setup(int _x, int _y, TerrainDef _terrainDef, int _height)
     {
+        xCoord = _x;
+        yCoord = _y;
+        terrainDef = _terrainDef;
+        height = _height;
+
         GenerateTerrain();
         GenerateElevation();
     }

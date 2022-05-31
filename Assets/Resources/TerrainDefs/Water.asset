@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7bee8d79066c194ab25ba6991652d99, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  displayName: Water (stacked)
+  displayName: Water
   prefab: {fileID: 1116251073080772604, guid: 663b2419132631d4091902d747115b0e, type: 3}
   material: {fileID: 2100000, guid: 8788de847008cac48abeb2f7b15a02d0, type: 2}
