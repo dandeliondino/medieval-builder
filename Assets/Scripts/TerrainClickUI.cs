@@ -38,6 +38,14 @@ public class TerrainClickUI : MonoBehaviour
         canvas.SetActive(false);
     }
 
+    public void Show(GameObject tile)
+    {
+        canvas.SetActive(true);
+        hexTileContainer = tile.GetComponent<TerrainTile>().hexTileContainer;
+        hexPosition = new Vector3Int(hexTileContainer.xCoord, hexTileContainer.yCoord, 0);
+        RefreshTileInfo();
+    }
+
     public void ShowAtTile(GameObject tile)
     {
         panel.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, tile.transform.position);

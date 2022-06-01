@@ -54,7 +54,8 @@ public class MouseInteractions : MonoBehaviour
         if (mouseOverTerrain)
         {
             lastCollider.GetComponent<TerrainTile>().MouseDown();
-            terrainClickUI.ShowAtTile(lastCollider.gameObject);
+            //terrainClickUI.ShowAtTile(lastCollider.gameObject);
+            terrainClickUI.Show(lastCollider.gameObject);
         }
     }
 
