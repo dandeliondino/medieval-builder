@@ -19,7 +19,7 @@ public class TerrainClickUI : MonoBehaviour
     public TextMeshProUGUI terrainLabel;
     public TextMeshProUGUI heightLabel;
 
-    public HexTileContainer hexTileContainer;
+    public Hex currentHex;
 
     private Vector3Int hexPosition;
 
@@ -45,8 +45,8 @@ public class TerrainClickUI : MonoBehaviour
     public void Show(GameObject terrainTile)
     {
         canvas.SetActive(true);
-        hexTileContainer = terrainTile.GetComponent<TerrainTile>().hexTileContainer;
-        hexPosition = new Vector3Int(hexTileContainer.xCoord, hexTileContainer.yCoord, 0);
+        currentHex = terrainTile.GetComponent<TerrainTile>().hex;
+        hexPosition = new Vector3Int(currentHex.xCoord, currentHex.yCoord, 0);
         RefreshTileInfo();
     }
 
@@ -54,49 +54,35 @@ public class TerrainClickUI : MonoBehaviour
     {
         panel.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, tile.transform.position);
         canvas.SetActive(true);
-        hexTileContainer = tile.GetComponent<TerrainTile>().hexTileContainer;
-        hexPosition = new Vector3Int(hexTileContainer.xCoord, hexTileContainer.yCoord, 0);
+        currentHex = tile.GetComponent<TerrainTile>().hex;
+        hexPosition = new Vector3Int(currentHex.xCoord, currentHex.yCoord, 0);
 
         RefreshTileInfo();
     }
 
     public void RaiseTerrain()
     {
-        hexTileContainer.RaiseTerrain();
+        currentHex.RaiseTerrain();
         RefreshTileInfo();
     }
 
     public void LowerTerrain()
     {
-        hexTileContainer.LowerTerrain();
+        currentHex.LowerTerrain();
         RefreshTileInfo();
     }
 
     public void ChangeTerrain(TerrainDef terrainDef)
     {
-        hexTileContainer.ChangeTerrain(terrainDef);
+        currentHex.ChangeTerrain(terrainDef);
         RefreshTileInfo();
     }
 
     public void RefreshTileInfo()
     {
-        coordinatesLabel.text = hexTileContainer.xCoord + ", " + hexTileContainer.yCoord;
-        terrainLabel.text = hexTileContainer.terrainDef.displayName;
-        heightLabel.text = hexTileContainer.height.ToString();
-    }
-
-    public void InsertColumn()
-    {
-        tilemap.InsertCells(hexPosition, new Vector3Int(1, 0, 0));
-        tilemap.ResizeBounds();
-        tilemap.GetComponent<TilemapManager>().FillEmptyTiles();
-    }
-
-    public void InsertRow()
-    {
-        tilemap.InsertCells(hexPosition, new Vector3Int(0, 1, 0));
-        tilemap.ResizeBounds();
-        tilemap.GetComponent<TilemapManager>().FillEmptyTiles();
+        coordinatesLabel.text = currentHex.xCoord + ", " + currentHex.yCoord;
+        terrainLabel.text = currentHex.terrainDef.displayName;
+        heightLabel.text = currentHex.height.ToString();
     }
 
 }

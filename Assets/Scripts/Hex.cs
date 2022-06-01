@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexTileContainer : MonoBehaviour
+public class Hex : MonoBehaviour
 {
     public GameObject baseTilePrefab;
     public TerrainDef terrainDef;
@@ -26,6 +26,7 @@ public class HexTileContainer : MonoBehaviour
 
     public void Setup(int _x, int _y, TerrainDef _terrainDef, int _height)
     {
+        Debug.Log("Setting up hex: " + _x + ", " + _y);
         xCoord = _x;
         yCoord = _y;
         terrainDef = _terrainDef;
@@ -58,7 +59,7 @@ public class HexTileContainer : MonoBehaviour
     {
         terrainObject = (GameObject)Instantiate(terrainDef.prefab, transform, false);
         terrainObject.GetComponent<MeshRenderer>().material = terrainDef.material;
-        terrainObject.GetComponent<TerrainTile>().hexTileContainer = this;
+        terrainObject.GetComponent<TerrainTile>().hex = this;
     }
 
     private void GenerateElevation()
