@@ -10,6 +10,7 @@ public class TerrainClickUI : MonoBehaviour
     public GameObject panel;
 
     public Tilemap tilemap;
+    public TilemapManager tilemapManager;
 
     public Transform changeTerrainButtonContainer;
     public GameObject changeTerrainButtonPrefab;
@@ -25,6 +26,9 @@ public class TerrainClickUI : MonoBehaviour
     private void Start()
     {
         Hide();
+
+        tilemapManager = TilemapManager.instance;
+
         TerrainDef[] terrainDefs = Resources.LoadAll<TerrainDef>("TerrainDefs");
         foreach (var terrainDef in terrainDefs)
         {
@@ -38,10 +42,10 @@ public class TerrainClickUI : MonoBehaviour
         canvas.SetActive(false);
     }
 
-    public void Show(GameObject tile)
+    public void Show(GameObject terrainTile)
     {
         canvas.SetActive(true);
-        hexTileContainer = tile.GetComponent<TerrainTile>().hexTileContainer;
+        hexTileContainer = terrainTile.GetComponent<TerrainTile>().hexTileContainer;
         hexPosition = new Vector3Int(hexTileContainer.xCoord, hexTileContainer.yCoord, 0);
         RefreshTileInfo();
     }

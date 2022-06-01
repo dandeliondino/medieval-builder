@@ -10,15 +10,20 @@ public class TilemapManager : MonoBehaviour
     public TerrainDef emptyTerrainDef;
     public GameObject hexTileContainer;
 
-    private HexTile originalTile;
-    private HexTile emptyTile;
+    private Tile emptyTile;
     private Tilemap tilemap;
 
+    public static TilemapManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        emptyTile = HexTile.CreateInstance<HexTile>();
+        emptyTile = Tile.CreateInstance<Tile>();
         emptyTile.gameObject = hexTileContainer;
 
         tilemap.origin = area.position;

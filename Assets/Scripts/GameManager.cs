@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     HexMapSaver xmlSerializer;
     HexMapLoader xmlDeserializer;
-    TileManager tileManager;
 
     public Slider xSlider;
     public Slider zSlider;
@@ -60,7 +59,6 @@ public class GameManager : MonoBehaviour
     {
         xmlSerializer = gameObject.GetComponent<HexMapSaver>();
         xmlDeserializer = gameObject.GetComponent<HexMapLoader>();
-        tileManager = gameObject.GetComponent<TileManager>();
 
         CreateTileTypeDict();
         SetUpTileTypeButtons();
@@ -70,10 +68,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadMap()
     {
-        GotoEditMap();
-        HexMap hexMap = xmlDeserializer.deserialize();
-        Debug.Log("HexMap loaded: " + hexMap.xsize + ", " + hexMap.zsize);
-        tileManager.GenerateMapFromHexMap(hexMap);
+        //GotoEditMap();
+        //HexMap hexMap = xmlDeserializer.deserialize();
+        //Debug.Log("HexMap loaded: " + hexMap.xsize + ", " + hexMap.zsize);
+        //tileManager.GenerateMapFromHexMap(hexMap);
     }
 
     public void CreateBlankMap()
@@ -119,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     public void NewMap()
     {
-        tileManager.ClearMap();
+        //tileManager.ClearMap();
         GotoNewMap();
     }
 
